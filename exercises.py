@@ -85,6 +85,10 @@ class Game:
         if board_full and no_winner:
             self.tie = True
 
+    def switch_turn(self):
+        turn_lookup = {'X': 'O', 'O': 'X'}
+        self.turn = turn_lookup[self.turn]
+
     def play_game(self):
         print("Welcome to Py-Pac-Poe!")
         print("Let's play!")
@@ -92,33 +96,6 @@ class Game:
 
 
 game_instance = Game()
-game_instance.board = {
-    'a1': 'X', 'b1': 'X', 'c1': 'X',  
-    'a2': 'O', 'b2': 'O', 'c2': 'X',  
-    'a3': 'X', 'b3': 'O', 'c3': 'O',  
-}
-game_instance.check_winner()
-game_instance.check_tie()
-game_instance.render()
-
-game_instance = Game()
-game_instance.board = {
-    'a1': 'X', 'b1': 'O', 'c1': 'X',  
-    'a2': 'O', 'b2': 'X', 'c2': 'O',  
-    'a3': 'O', 'b3': 'X', 'c3': 'O',  
-}
-game_instance.check_winner()
-game_instance.check_tie()
-game_instance.render()
-
-game_instance = Game()
-game_instance.board = {
-    'a1': 'X', 'b1': None, 'c1': 'X',  
-    'a2': 'O', 'b2': 'X', 'c2': None,  
-    'a3': 'O', 'b3': 'X', 'c3': 'O',  
-}
-game_instance.check_winner()
-game_instance.check_tie()
-game_instance.render()
-
-# game_instance.play_game()
+print(f"Start: {game_instance.turn}")
+game_instance.switch_turn()
+print(f"Switch turn: {game_instance.turn}")
