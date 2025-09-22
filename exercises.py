@@ -9,8 +9,14 @@ class Game:
             'a3': None, 'b3': None, 'c3': None,
         }
 
-game = Game()
-print(f"Current turn: {game.turn}")
-print(f"Is it a tie? {game.tie}")
-print(f"Winner: {game.winner}")
-print(f"Board: {game.board}")
+    def play_game(self):
+        print("Welcome to Py-Pac-Poe!")
+        print("Let's play!")
+
+game_instance = Game()
+game_instance.play_game()
+
+print(f"Current turn: {game_instance.turn}")
+print(f"Is it a tie? {game_instance.tie}")
+print(f"Winner: {game_instance.winner}")
+print(f"Board: {game_instance.board}")
