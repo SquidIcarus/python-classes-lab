@@ -8,7 +8,7 @@ class Game:
             'a2': None, 'b2': None, 'c2': None,
             'a3': None, 'b3': None, 'c3': None,
         }
-    
+
     def print_board(self):
         b = self.board
         print(f"""
@@ -25,19 +25,34 @@ class Game:
             print("Tie game!")
         elif self.winner:
             print(f"{self.winner} wins the game!")
-        else: 
+        else:
             print(f"It's player {self.turn}'s turn!")
 
     def render(self):
         self.print_board()
         self.print_message()
 
+    def get_move(self):
+        while True:
+            move = input(f"Enter a valid move (example: A1): ").lower()
+
+            if move in self.board:
+                if self.board[move] is None:
+                    return move
+                else:
+                    print("That spot is already taken! Try again.")
+            else:
+                print("Invalid move! Please enter a position like a1, b2, c3, etc:")
+
     def play_game(self):
         print("Welcome to Py-Pac-Poe!")
         print("Let's play!")
-        game_instance.render()
+        self.render()
+
 
 game_instance = Game()
 game_instance.board['a1'] = 'X'
-game_instance.board['b2'] = 'O'
 game_instance.play_game()
+move = game_instance.get_move()
+print(f"You entered: {move}")
+print("Great! That's a valid move.")
