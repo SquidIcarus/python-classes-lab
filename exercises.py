@@ -57,7 +57,7 @@ class Game:
         if b['a3'] and (b['a3'] == b['b3'] == b['c3']):
             self.winner = b['a3']
             return
-        
+
         # COLUMNS
         if b['a1'] and (b['a1'] == b['a2'] == b['a3']):
             self.winner = b['a1']
@@ -68,15 +68,22 @@ class Game:
         if b['c1'] and (b['c1'] == b['c2'] == b['c3']):
             self.winner = b['c1']
             return
-        
+
         # DIAGONALS
         if b['a1'] and (b['a1'] == b['b2'] == b['c3']):
             self.winner = b['a1']
             return
-        if b['a2'] and (b['a2'] == b['b2'] == b['c2']):
-            self.winner = b['a2']
+        if b['c1'] and (b['c1'] == b['b2'] == b['a3']):
+            self.winner = b['c1']
             return
-        
+
+    def check_tie(self):
+        board_full = all(space is not None for space in self.board.values())
+
+        no_winner = self.winner is None
+
+        if board_full and no_winner:
+            self.tie = True
 
     def play_game(self):
         print("Welcome to Py-Pac-Poe!")
@@ -85,25 +92,33 @@ class Game:
 
 
 game_instance = Game()
-game_instance.board['a1'] = 'X'
-game_instance.board['b1'] = 'X'
-game_instance.board['c1'] = 'X'
+game_instance.board = {
+    'a1': 'X', 'b1': 'X', 'c1': 'X',  
+    'a2': 'O', 'b2': 'O', 'c2': 'X',  
+    'a3': 'X', 'b3': 'O', 'c3': 'O',  
+}
 game_instance.check_winner()
+game_instance.check_tie()
 game_instance.render()
 
 game_instance = Game()
-game_instance.board['a1'] = 'O'
-game_instance.board['b2'] = 'O'
-game_instance.board['c3'] = 'O'
+game_instance.board = {
+    'a1': 'X', 'b1': 'O', 'c1': 'X',  
+    'a2': 'O', 'b2': 'X', 'c2': 'O',  
+    'a3': 'O', 'b3': 'X', 'c3': 'O',  
+}
 game_instance.check_winner()
+game_instance.check_tie()
 game_instance.render()
 
 game_instance = Game()
-game_instance.board['a1'] = 'X'
-game_instance.board['b2'] = 'O'
-
+game_instance.board = {
+    'a1': 'X', 'b1': None, 'c1': 'X',  
+    'a2': 'O', 'b2': 'X', 'c2': None,  
+    'a3': 'O', 'b3': 'X', 'c3': 'O',  
+}
 game_instance.check_winner()
+game_instance.check_tie()
 game_instance.render()
 
 # game_instance.play_game()
-
