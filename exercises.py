@@ -8,15 +8,36 @@ class Game:
             'a2': None, 'b2': None, 'c2': None,
             'a3': None, 'b3': None, 'c3': None,
         }
+    
+    def print_board(self):
+        b = self.board
+        print(f"""
+                A   B   C
+            1)  {b['a1'] or ' '} | {b['b1'] or ' '} | {b['c1'] or ' '}
+                ----------
+            2)  {b['a2'] or ' '} | {b['b2'] or ' '} | {b['c2'] or ' '}
+                ----------
+            3)  {b['a3'] or ' '} | {b['b3'] or ' '} | {b['c3'] or ' '}
+            """)
+
+    def print_message(self):
+        if self.tie:
+            print("Tie game!")
+        elif self.winner:
+            print(f"{self.winner} wins the game!")
+        else: 
+            print(f"It's player {self.turn}'s turn!")
+
+    def render(self):
+        self.print_board()
+        self.print_message()
 
     def play_game(self):
         print("Welcome to Py-Pac-Poe!")
         print("Let's play!")
+        game_instance.render()
 
 game_instance = Game()
+game_instance.board['a1'] = 'X'
+game_instance.board['b2'] = 'O'
 game_instance.play_game()
-
-print(f"Current turn: {game_instance.turn}")
-print(f"Is it a tie? {game_instance.tie}")
-print(f"Winner: {game_instance.winner}")
-print(f"Board: {game_instance.board}")
